@@ -1,64 +1,49 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-
+import Coursecard from "../CoursesCard/coursescard";
+import VcCard from "../VcCard/vccard";
+import Stats from "../Stats/stats";
 
 const Dashboard = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const videos = [
-      { title: 'Introduction to React', thumbnail: 'https://via.placeholder.com/150' },
-      { title: 'Mastering Tailwind CSS', thumbnail: 'https://via.placeholder.com/150' },
-      { title: 'Next.js Full Course', thumbnail: 'https://via.placeholder.com/150' },
-      { title: 'JavaScript Fundamentals', thumbnail: 'https://via.placeholder.com/150' },
-    ];
+  return (
+    <div className="min-h-screen grid grid-cols-1 md:grid-cols-5 gap-0 relative">
+  {/* Left Column (60%) */}
+  <div className="col-span-1 md:col-span-3 grid grid-rows-2 gap-0 relative">
+    {/* Left Row 1 */}
+    <div className="bg-blue-300 flex flex-start flex-wrap items-center justify-center text-center rounded-br-full text-blue-700 font-bold text-5xl sm:text-4xl md:text-6xl">
+      Let's SkillUp!
+    </div>
 
-    
-    const filteredVideos = videos.filter(video =>
-      video.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  
+    {/* Left Row 2 - Stats Component */}
+    <div className="flex items-center justify-center mt-2">
+      <Stats />
+    </div>
 
-    return (
-      <div className="flex-1 p-6">
-        {/* Top Section */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-            <img 
-              src="https://via.placeholder.com/50" 
-              alt="User Avatar" 
-              className="w-12 h-12 rounded-full"
-            />
-            <h2 className="text-2xl font-semibold">John Doe</h2>
-          </div>
-        </div>
+    {/* Input Field */}
+    <input
+      type="text"
+      placeholder="Enter text"
+      className="absolute mx-4 mb-4 top-4 md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 bg-white border border-gray-300 rounded-3xl px-6 py-2 shadow-md w-11/12 sm:w-3/4 lg:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
 
+  {/* Right Column (40%) */}
+  <div className="hidden  relative col-span-2 md:grid grid-rows-2 gap-0">
+    {/* Right Row 1 */}
+    <div className="flex items-center justify-center"></div>
 
-        {/* Search Bar */}
-        <div className="mb-6">
-          <input 
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search videos..."
-            className=" text-black w-full p-4 rounded-lg border border-gray-900 focus:outline-none focus:ring-4 focus:ring-blue-200"
-          />
-        </div>
+    {/* Right Row 2 - VcCard Component */}
+    <div className="absolute right-1/2 translate-x-1/2 translate-y-1/2">
+      <VcCard />
+    </div>
 
-        {/* Currently Watching Section */}
-        <h3 className="text-xl font-semibold mb-4">Currently Watching</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {filteredVideos.map((video, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg shadow-md overflow-hidden">
-              <img src={video.thumbnail} alt={video.title} className="w-full h-32 object-cover" />
-              <div className="p-4">
-                <h4 className="font-semibold text-lg">{video.title}</h4>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    {/* Bottom Row */}
+    <div className="bg-blue-200 flex items-center justify-center rounded-tl-full"></div>
+  </div>
+</div>
 
-    );
-}
+  );
+};
 
 export default Dashboard;
