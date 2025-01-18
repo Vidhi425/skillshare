@@ -19,11 +19,18 @@ export default function signup() {
               Sign Up
             </h2>
             <form className="space-y-4">
-              <input
-                type="text"
-                placeholder="Full Name"
-                className=" text-black w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              <div className="flex flex-row gap-2">
+                <input
+                  type="text"
+                  placeholder="First Name"
+                  className=" text-black w-1/2 p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  type="text"
+                  placeholder="Last Name"
+                  className=" text-black w-1/2 p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
               <input
                 type="text"
                 placeholder="Username"
@@ -58,6 +65,17 @@ export default function signup() {
                       style={{ color: "#1A3EAD", width: "20px" }}
                     />
                   )}
+                </button>
+              </div>
+              <label className="block text-base font-medium text-black">
+                Select Your Role
+              </label>
+              <div className="flex gap-4">
+                <button className="px-4 py-1 rounded-full border border-blue-500 text-blue-500 hover:bg-blue-400 hover:text-white transition">
+                  Student
+                </button>
+                <button className="px-4 py-1 rounded-full border border-blue-500 text-blue-500 hover:bg-blue-400 hover:text-white transition">
+                  Mentor
                 </button>
               </div>
 

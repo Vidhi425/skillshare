@@ -327,75 +327,134 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 "use client";
 ;
 ;
-// import { useState } from "react";
-const coursecard = ()=>{
+const CourseCard = ()=>{
+    const courses = [
+        {
+            id: 1,
+            title: "Web Development Course",
+            description: "Learn how to build dynamic websites and applications.",
+            image: "https://via.placeholder.com/300x200",
+            userImage: "https://via.placeholder.com/40x40",
+            username: "John Doe"
+        },
+        {
+            id: 2,
+            title: "Data Science Bootcamp",
+            description: "Master data analysis and machine learning.",
+            image: "https://via.placeholder.com/300x200",
+            userImage: "https://via.placeholder.com/40x40",
+            username: "Alice Smith"
+        },
+        {
+            id: 3,
+            title: "UI/UX Design Fundamentals",
+            description: "Design intuitive and user-friendly interfaces.",
+            image: "https://via.placeholder.com/300x200",
+            userImage: "https://via.placeholder.com/40x40",
+            username: "David Lee"
+        },
+        {
+            id: 4,
+            title: "Mobile App Development",
+            description: "Build powerful mobile applications.",
+            image: "https://via.placeholder.com/300x200",
+            userImage: "https://via.placeholder.com/40x40",
+            username: "Emma Brown"
+        },
+        {
+            id: 5,
+            title: "Cloud Computing Essentials",
+            description: "Understand the fundamentals of cloud services.",
+            image: "https://via.placeholder.com/300x200",
+            userImage: "https://via.placeholder.com/40x40",
+            username: "Michael Scott"
+        },
+        {
+            id: 6,
+            title: "Cybersecurity Basics",
+            description: "Learn to secure systems and networks.",
+            image: "https://via.placeholder.com/300x200",
+            userImage: "https://via.placeholder.com/40x40",
+            username: "Sophia Green"
+        }
+    ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "bg-white rounded-lg shadow-lg",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                    src: "https://via.placeholder.com/100x100",
-                    className: "w-full h-48 rounded-t-lg object-cover"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/CoursesCard/coursescard.js",
-                    lineNumber: 9,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                    className: "text-xl font-bold mt-4 mx-3",
-                    children: "Web Development Course"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/CoursesCard/coursescard.js",
-                    lineNumber: 13,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-gray-600 font-medium my-2 mx-3",
-                    children: "This is a brief description of the card content."
-                }, void 0, false, {
-                    fileName: "[project]/src/components/CoursesCard/coursescard.js",
-                    lineNumber: 14,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex flex-row  gap-2 m-2",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                            src: "https://via.placeholder.com/10x10",
-                            className: " h-7 rounded-3xl object-cover"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/CoursesCard/coursescard.js",
-                            lineNumber: 18,
-                            columnNumber: 9
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex justify-center items-center text-black font-normal",
-                            children: "username"
-                        }, void 0, false, {
-                            fileName: "[project]/src/components/CoursesCard/coursescard.js",
-                            lineNumber: 22,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/src/components/CoursesCard/coursescard.js",
-                    lineNumber: 17,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/src/components/CoursesCard/coursescard.js",
-            lineNumber: 8,
-            columnNumber: 7
-        }, this)
+        className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4",
+        children: courses.map((course)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-white rounded-lg shadow-lg overflow-hidden",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: course.image,
+                        alt: course.title,
+                        className: "w-full h-48 object-cover"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                        lineNumber: 60,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                className: "text-xl text-black font-bold mt-4 mx-3",
+                                children: course.title
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                                lineNumber: 66,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "text-gray-600 font-medium my-2 mx-3",
+                                children: course.description
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                                lineNumber: 67,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                        lineNumber: 65,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex items-center gap-2 m-3",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                src: course.userImage,
+                                alt: course.username,
+                                className: "h-8 w-8 rounded-full object-cover"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                                lineNumber: 73,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "text-black font-normal",
+                                children: course.username
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                                lineNumber: 78,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                        lineNumber: 72,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, course.id, true, {
+                fileName: "[project]/src/components/CoursesCard/coursescard.js",
+                lineNumber: 59,
+                columnNumber: 9
+            }, this))
     }, void 0, false, {
         fileName: "[project]/src/components/CoursesCard/coursescard.js",
-        lineNumber: 7,
+        lineNumber: 57,
         columnNumber: 5
     }, this);
 };
-const __TURBOPACK__default__export__ = coursecard;
+const __TURBOPACK__default__export__ = CourseCard;
 }}),
 "[project]/src/components/VcCard/vccard.js [app-ssr] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
