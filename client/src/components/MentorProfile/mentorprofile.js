@@ -17,11 +17,10 @@ const mentorprofile = ({ username, userImage }) => {
 
   const handleFormSubmit = (formData) => {
     console.log("Form Data Submitted:", formData);
-    // Handle form submission logic here, e.g., API call
   };
   return (
     <>
-      <div className="text-black  rounded-lg  overflow-hidden flex justify-between items-center px-8 ">
+      <div className="text-black  rounded-lg  overflow-hidden flex justify-between items-center px-8 " >
         <div className="flex flex-col space-y-2">
           <MentorMeta username={username} />
           <Ratings />

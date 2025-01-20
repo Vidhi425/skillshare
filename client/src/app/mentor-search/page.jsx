@@ -3,6 +3,7 @@ import React from "react";
 import Leftnav from "../../components/Leftnav/leftnav";
 import ProfileNav from "@/components/ProfileNav/profilenav";
 import MentorProfile from "../../components/MentorProfile/mentorprofile";
+import MentorDetails from "@/components/MentorDetails/mentordetails";
 
 const MentorSearch = () => {
   const users = [
@@ -36,9 +37,27 @@ const MentorSearch = () => {
               <MentorProfile username={user.username} userImage={user.userImage} />
             </div>
           ))}
+        
+
         </div>
+        
+        {/* {
+          users.map((user)=>(
+            <div key={user.username}>
+            <MentorDetails username={user.username} />
+
+            </div>
+
+          ))
+        } */}
+
+            </div>
+          
+       
       </div>
-    </div>
+     
+    
+    
   );
 };
 

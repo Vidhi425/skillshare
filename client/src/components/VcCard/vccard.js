@@ -5,7 +5,7 @@ const vccard = () => {
   return (
     <div className="bg-white rounded-lg shadow-lg">
     <img
-      src="https://via.placeholder.com/400x400"
+      src="https://picsum.photos/400/400"
       className="w-full h-48 rounded-t-lg object-cover"
       alt="Placeholder"
     />
