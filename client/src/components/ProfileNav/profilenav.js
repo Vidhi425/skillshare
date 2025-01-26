@@ -1,22 +1,24 @@
 "use client";
 import React, { useState } from "react";
+import users from "../../data/mentor";
 
 const ProfileNav = () => {
   return (
     <>
     
-      <div className="flex items-center gap-2 m-3 ">
+      <div className="flex items-center gap-2">
         <img
-          src="https://picsum.photos/40/40"
+          src={users[0].userImage}
           alt="courseusername"
           className="h-14 w-14 rounded-full object-cover"
         />
         <div className="flex flex-col ">
-          <div className="text-black text-xs sm:text-lg">Vidhi</div>
-          <div className="text-slate-500 text-xs sm:text-base ">Web Developer</div>
+          <div className="text-black text-xs sm:text-lg">{users[0].username}</div>
+          <div className="text-slate-500 text-xs sm:text-base ">{users[0].profession}</div>
         </div>
+       
       </div>
-    
+     
      
     </>
   );

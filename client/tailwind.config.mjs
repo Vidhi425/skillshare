@@ -11,6 +11,12 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      boxShadow: {
+        custom: ' 20px -20px 60px  #c7c7c7, inset -20px 20px 60px #f9f9f9',
+      },
+      backgroundImage: {
+        'gradient-custom': 'linear-gradient(45deg, #f0f0f0, #cacaca)',
+      },
     },
   },
   plugins: [],

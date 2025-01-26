@@ -11,11 +11,55 @@ __turbopack_esm__({
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/image.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/@hookform/resolvers/zod/dist/zod.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$lib$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/zod/lib/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
+;
+var _s = __turbopack_refresh__.signature();
 "use client";
 ;
 ;
 ;
+;
+;
+;
+// Define Zod schema
+const mentorProfileSchema = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$lib$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["z"].object({
+    about: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$lib$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["z"].string().min(10, "Tell us more about yourself (at least 10 characters).").max(500, "Too long! Keep it under 500 characters."),
+    profilePicture: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$lib$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["z"].any().refine((file)=>file?.[0], "Profile picture is required."),
+    certificate: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$zod$2f$lib$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["z"].any().refine((file)=>file?.[0], "Certificate is required.")
+});
 const MentorProfileForm = ()=>{
+    _s();
+    const [profilePictureName, setProfilePictureName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const [certificateName, setCertificateName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const { register, handleSubmit, formState: { errors } } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"])({
+        resolver: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$hookform$2f$resolvers$2f$zod$2f$dist$2f$zod$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["zodResolver"])(mentorProfileSchema)
+    });
+    const onSubmit = async (data)=>{
+        const formData = new FormData();
+        formData.append("about", data.about);
+        formData.append("profilePicture", data.profilePicture[0]);
+        formData.append("certificate", data.certificate[0]);
+        try {
+            const response = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post("https://jsonplaceholder.typicode.com/posts", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            console.log("Form data sent to backend:", {
+                about: data.about,
+                profilePicture: data.profilePicture[0],
+                certificate: data.certificate[0]
+            });
+            console.log("Fake API Response:", response.data);
+            alert("Profile saved successfully!");
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            alert("Something went wrong. Please try again.");
+        }
+    };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "flex flex-col md:flex-row h-screen",
         children: [
@@ -29,11 +73,12 @@ const MentorProfileForm = ()=>{
                             children: "Build Mentor Profile"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                            lineNumber: 11,
+                            lineNumber: 67,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                             className: "space-y-4",
+                            onSubmit: handleSubmit(onSubmit),
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     children: [
@@ -42,7 +87,7 @@ const MentorProfileForm = ()=>{
                                             children: "Upload Profile Picture"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                            lineNumber: 17,
+                                            lineNumber: 73,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -50,40 +95,50 @@ const MentorProfileForm = ()=>{
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "file",
-                                                    id: "file-upload",
-                                                    className: "hidden"
+                                                    id: "profilePicture",
+                                                    ...register("profilePicture"),
+                                                    className: "hidden",
+                                                    onChange: (e)=>setProfilePictureName(e.target.files[0]?.name || "")
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                                    lineNumber: 22,
+                                                    lineNumber: 77,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    htmlFor: "file-upload",
-                                                    className: "cursor-pointer border-2 border-blue-500  text-black font-medium py-2 px-4 rounded-full inline-block",
+                                                    htmlFor: "profilePicture",
+                                                    className: "cursor-pointer border-2 border-blue-500 text-black font-medium py-2 px-4 rounded-full inline-block",
                                                     children: "Choose File"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                                    lineNumber: 24,
+                                                    lineNumber: 86,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    id: "file-name",
-                                                    className: "ml-4 text-gray-600 text-sm"
+                                                    className: "ml-4 text-gray-600 text-sm",
+                                                    children: profilePictureName || "No file chosen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                                    lineNumber: 31,
+                                                    lineNumber: 92,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                            lineNumber: 20,
+                                            lineNumber: 76,
                                             columnNumber: 15
+                                        }, this),
+                                        errors.profilePicture && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-sm",
+                                            children: errors.profilePicture.message
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
+                                            lineNumber: 97,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                    lineNumber: 16,
+                                    lineNumber: 72,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -93,7 +148,7 @@ const MentorProfileForm = ()=>{
                                             children: "Upload Certificate"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                            lineNumber: 39,
+                                            lineNumber: 105,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -101,40 +156,50 @@ const MentorProfileForm = ()=>{
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                     type: "file",
-                                                    id: "file-upload",
-                                                    className: "hidden"
+                                                    id: "certificate",
+                                                    ...register("certificate"),
+                                                    className: "hidden",
+                                                    onChange: (e)=>setCertificateName(e.target.files[0]?.name || "")
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                                    lineNumber: 44,
+                                                    lineNumber: 109,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                    htmlFor: "file-upload",
-                                                    className: "cursor-pointer border-2 border-blue-500  text-black font-medium py-2 px-4 rounded-full inline-block",
+                                                    htmlFor: "certificate",
+                                                    className: "cursor-pointer border-2 border-blue-500 text-black font-medium py-2 px-4 rounded-full inline-block",
                                                     children: "Choose File"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                                    lineNumber: 46,
+                                                    lineNumber: 118,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    id: "file-name",
-                                                    className: "ml-4 text-gray-600 text-sm"
+                                                    className: "ml-4 text-gray-600 text-sm",
+                                                    children: certificateName || "No file chosen"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                                    lineNumber: 53,
+                                                    lineNumber: 124,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                            lineNumber: 42,
+                                            lineNumber: 108,
                                             columnNumber: 15
+                                        }, this),
+                                        errors.certificate && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-sm",
+                                            children: errors.certificate.message
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
+                                            lineNumber: 129,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                    lineNumber: 38,
+                                    lineNumber: 104,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -144,22 +209,31 @@ const MentorProfileForm = ()=>{
                                             children: "Write About Yourself"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                            lineNumber: 62,
+                                            lineNumber: 135,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                                             rows: 5,
+                                            ...register("about"),
                                             placeholder: "Tell us about yourself...",
                                             className: "w-full border border-gray-300 rounded-xl p-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                            lineNumber: 65,
+                                            lineNumber: 138,
                                             columnNumber: 15
+                                        }, this),
+                                        errors.about && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-red-500 text-sm",
+                                            children: errors.about.message
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
+                                            lineNumber: 145,
+                                            columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                    lineNumber: 61,
+                                    lineNumber: 134,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -168,24 +242,24 @@ const MentorProfileForm = ()=>{
                                     children: "Save Profile"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                                    lineNumber: 73,
+                                    lineNumber: 150,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                            lineNumber: 14,
+                            lineNumber: 70,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                    lineNumber: 10,
+                    lineNumber: 66,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                lineNumber: 9,
+                lineNumber: 65,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -198,21 +272,26 @@ const MentorProfileForm = ()=>{
                     className: "w-full h-full object-cover"
                 }, void 0, false, {
                     fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                    lineNumber: 85,
+                    lineNumber: 162,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-                lineNumber: 84,
+                lineNumber: 161,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/(auth)/mentor-signup/page.jsx",
-        lineNumber: 7,
+        lineNumber: 63,
         columnNumber: 5
     }, this);
 };
+_s(MentorProfileForm, "m2LSEK0rfMGGAsTdEmPVo7F322E=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useForm"]
+    ];
+});
 _c = MentorProfileForm;
 const __TURBOPACK__default__export__ = MentorProfileForm;
 var _c;

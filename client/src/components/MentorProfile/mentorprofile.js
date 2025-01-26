@@ -20,7 +20,7 @@ const mentorprofile = ({ username, userImage }) => {
   };
   return (
     <>
-      <div className="text-black  rounded-lg  overflow-hidden flex justify-between items-center px-8 " >
+      <div className="text-black  rounded-3xl  overflow-hidden flex justify-between items-center  px-8 shadow-custom " >
         <div className="flex flex-col space-y-2">
           <MentorMeta username={username} />
           <Ratings />
