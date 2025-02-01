@@ -8,9 +8,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { login } from "../../../redux/authSlice";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const loginSchema = z.object({
-  fullName: z.string().min(2, "Full Name is required"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
 });
@@ -31,32 +31,22 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
   });
 
-  const  onSubmit =async (data) => {
-    dispatch(login({ fullName: data.fullName, email: data.email }));
-    alert("Login successful!");
-
-
+  const onSubmit = async (data) => {
     try {
-      const fakeApiEndpoint = "https://jsonplaceholder.typicode.com/posts";
-  
-      const response = await axios.post(fakeApiEndpoint, {
-        fullName: data.fullName,
-        email: data.email,
-        password: data.password,
-      });
-  
-      console.log("Form data sent to backend:", {
-        fullName: data.fullName,
-        email: data.email,
-        password: data.password,
-      });
-  
-      console.log("API Response:", response.data);
-  
-      alert("Login successful! Data sent to backend.");
+      const loginUrl = "http://localhost:8080/auth/login";
+      const response = await axios.post(loginUrl, data);
+      if (response.data.success) {
+        dispatch(
+          login({ user: response.data.user, token: response.data.token })
+        );
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+        return;
+      }
     } catch (error) {
-      console.error("Error sending data to the backend:", error);
-      alert("Something went wrong. Please try again.");
+      console.error("Error logging in:", error);
+      toast.error(error);
     }
   };
 
@@ -70,23 +60,6 @@ export default function Login() {
               Login
             </h2>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-              {/* Full Name */}
-              <div>
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  {...register("fullName")}
-                  className={`text-black w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                    errors.fullName ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.fullName && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.fullName.message}
-                  </p>
-                )}
-              </div>
-
               {/* Email */}
               <div>
                 <input
