@@ -20,13 +20,16 @@ const mentorprofile = ({ username, userImage }) => {
   };
   return (
     <>
-      <div className="text-black  rounded-3xl  overflow-hidden flex justify-between items-center  px-8 shadow-custom " >
+      <div
+        className="text-black  rounded-3xl  overflow-hidden flex justify-between items-center px-10 mx-1  shadow-md"
+       
+      >
         <div className="flex flex-col space-y-2">
           <MentorMeta username={username} />
           <Ratings />
           <button
             onClick={handleSendRequest}
-            className="py-2 px-4 bg-blue-400 text-white rounded-xl  hover:bg-blue-300"
+            className=" p-2 text-sm bg-blue-400 text-white rounded-xl  hover:bg-blue-300"
           >
             Send Request
           </button>
@@ -42,10 +45,7 @@ const mentorprofile = ({ username, userImage }) => {
       </div>
 
       {isPopupOpen && (
-        <RequestForm
-          onClose={handleClosePopup}
-          onSubmit={handleFormSubmit}
-        />
+        <RequestForm onClose={handleClosePopup} onSubmit={handleFormSubmit} />
       )}
     </>
   );

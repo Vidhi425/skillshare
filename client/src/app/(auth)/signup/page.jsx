@@ -6,8 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Image from "next/image";
+import Proficiencies from "@/components/Proficiencies/proficiencies";
 
-
+// Define Zod schema for the normal signup form
 const signupSchema = z.object({
   firstName: z.string().min(1, "First name is required."),
   lastName: z.string().min(1, "Last name is required."),
@@ -21,8 +22,24 @@ const signupSchema = z.object({
   role: z.enum(["USER", "MENTOR"], "Please select a role."),
 });
 
+const mentorProfileSchema = z.object({
+  about: z
+    .string()
+    .min(10, "Tell us more about yourself (at least 10 characters).")
+    .max(500, "Too long! Keep it under 500 characters."),
+  profilePicture: z
+    .any()
+    .refine((file) => file?.[0], "Profile picture is required."),
+  certificate: z.any().refine((file) => file?.[0], "Certificate is required."),
+});
+
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
+  const [profilePictureName, setProfilePictureName] = useState("");
+  const [certificateName, setCertificateName] = useState("");
+  const [isMentor, setIsMentor] = useState(false); // State to toggle mentor fields
+  const [selectedProficiencies, setSelectedProficiencies] = useState([]);
+
   const toggleVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -31,8 +48,13 @@ export default function Signup() {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     resolver: zodResolver(signupSchema),
+  });
+
+  const mentorForm = useForm({
+    resolver: zodResolver(mentorProfileSchema),
   });
 
   const onSubmit = async (data) => {
@@ -46,10 +68,20 @@ export default function Signup() {
     }
   };
 
+  const handleRoleChange = (e) => {
+    setIsMentor(e.target.value === "MENTOR");
+  };
+
+  const handleProficiencyChange = (selectedOptions) => {
+    const values = selectedOptions.map((option) => option.value);
+    setSelectedProficiencies(selectedOptions);
+    setValue("proficiencies", values); // Update form state for proficiencies
+  };
+
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-full ">
       {/* Left Section - Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+      <div className="w-full  md:w-[70%] flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <h2 className="text-2xl md:text-5xl font-bold mb-6 text-blue-800">
             Sign Up
@@ -76,7 +108,9 @@ export default function Signup() {
                 className="text-black w-1/2 p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.lastName && (
-                <p className="text-red-500 text-sm">{errors.lastName.message}</p>
+                <p className="text-red-500 text-sm">
+                  {errors.lastName.message}
+                </p>
               )}
             </div>
 
@@ -145,6 +179,7 @@ export default function Signup() {
                   value="USER"
                   {...register("role")}
                   className="mr-2"
+                  onChange={handleRoleChange}
                 />
                 Student
               </label>
@@ -154,12 +189,78 @@ export default function Signup() {
                   value="MENTOR"
                   {...register("role")}
                   className="mr-2"
+                  onChange={handleRoleChange}
                 />
                 Mentor
               </label>
             </div>
             {errors.role && (
               <p className="text-red-500 text-sm">{errors.role.message}</p>
+            )}
+
+            {/* Mentor Profile Fields */}
+            {isMentor && (
+              <>
+                <div className="h-full">
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Write About Yourself
+                  </label>
+                  <textarea
+                    rows={5}
+                    {...mentorForm.register("about")}
+                    placeholder="Tell us about yourself..."
+                    className="w-full border border-gray-300 rounded-xl p-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  ></textarea>
+                  {mentorForm.formState.errors.about && (
+                    <p className="text-red-500 text-sm">
+                      {mentorForm.formState.errors.about.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Upload Profile Picture
+                  </label>
+                  <input
+                    type="file"
+                    {...mentorForm.register("profilePicture")}
+                    className="text-black w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  {mentorForm.formState.errors.profilePicture && (
+                    <p className="text-red-500 text-sm">
+                      {mentorForm.formState.errors.profilePicture.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Upload Certificate
+                  </label>
+                  <input
+                    type="file"
+                    {...mentorForm.register("certificate")}
+                    className="text-black w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  {mentorForm.formState.errors.certificate && (
+                    <p className="text-red-500 text-sm">
+                      {mentorForm.formState.errors.certificate.message}
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
+
+            {/* Proficiencies Multi-Select */}
+            <Proficiencies
+              onChange={handleProficiencyChange}
+              selectedProficiencies={selectedProficiencies}
+            />
+            {errors.proficiencies && (
+              <p className="text-red-500 text-sm">
+                {errors.proficiencies.message}
+              </p>
             )}
 
             {/* Submit Button */}
@@ -171,7 +272,7 @@ export default function Signup() {
             </button>
           </form>
           <p className="mt-4 text-center text-gray-600">
-            Don't have an account yet?{" "}
+            Already have an account?{" "}
             <a href="/login" className="text-blue-500 hover:underline">
               Login
             </a>
@@ -180,13 +281,13 @@ export default function Signup() {
       </div>
 
       {/* Right Section - Image */}
-      <div className="hidden md:block w-full md:w-1/2">
+      <div className="hidden md:block w-full md:w-[30%] bg-blue-600 p-6 rounded-3xl md:mx-5 lg:mx-20 my-20 shadow-lg">
         <Image
           src="/images/signup.png"
           alt="Signup Image"
           width={700}
           height={1000}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-2xl"
         />
       </div>
     </div>

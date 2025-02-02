@@ -20,15 +20,15 @@ const MentorSearch = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden ml-8">
       {/* Left Navigation */}
       <div className="hidden md:block md:w-1/5 h-screen">
         <Leftnav />
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col w-full md:w-4/5 px-16 space-y-4 pb-5">
-        <div className="flex-col my-8">
+      <div className="flex flex-col w-full md:w-4/5 px-16 ">
+        <div className="flex-col mt-6">
           <div className="text-black font-semibold text-3xl">Find a Mentor</div>
           <div className="text-gray-400 font-thin text-md my-2">
             Find Your Mentor Here
@@ -39,7 +39,7 @@ const MentorSearch = () => {
             placeholder="Search by name"
           />
         </div>
-        <div className="bg-white overflow-y-auto no-scrollbar my-6 flex-col space-y-6">
+        <div className="bg-white overflow-y-auto no-scrollbar my-6 flex-col space-y-6 ">
           {users.map((user) => (
             <div key={user.username}>
               <MentorProfile
