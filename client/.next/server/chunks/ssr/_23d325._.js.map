@@ -1,9 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file://C%3A/Users/KIIT0001/Desktop/Projects/skillshare/src/app/page.js"],"sourcesContent":["import Image from \"next/image\";\nimport Navbar from \"../components/Navbar/navbar\";\nexport default function Home() {\n  return (\n    <div>\n      <Navbar/>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;AAAA;;;;;;;;;AAEe,SAAS;IACtB,qBACE,8OAAC;kBACC,cAAA,8OAAC;;;;;;;;;;AAGP"}},
-    {"offset": {"line": 33, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
-    {"offset": {"line": 44, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
-    {"offset": {"line": 44, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
-}
