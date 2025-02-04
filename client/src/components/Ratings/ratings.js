@@ -7,7 +7,7 @@ const StarRating = () => {
   const [hover, setHover] = useState(0);  // Keeps track of hovered stars
 
   return (
-    <div className="flex space-x-0">
+    <div className="flex space-x-0 ">
       {Array(5)
         .fill(0) 
         .map((_, index) => {

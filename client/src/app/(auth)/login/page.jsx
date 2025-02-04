@@ -54,7 +54,7 @@ export default function Login() {
     <>
       <div className="flex flex-col md:flex-row h-screen">
         {/* Left Section - Form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full md:w-[70%] flex items-center justify-center p-8">
           <div className="w-full max-w-md">
             <h2 className="text-2xl md:text-5xl font-bold mb-6 text-blue-800">
               Login
@@ -130,15 +130,20 @@ export default function Login() {
         </div>
 
         {/* Right Section - Image */}
-        <div className="hidden md:block w-full md:w-1/2">
-          <Image
-            src="/images/signup.png"
-            alt="Signup Image"
-            width={700}
-            height={1000}
-            className="w-full h-full object-cover"
-          />
-        </div>
+         <div
+               className="hidden md:block w-full md:w-[30%] bg-blue-600 p-6 rounded-3xl md:mx-5 lg:mx-20 my-20 shadow-lg "
+               style={{
+                 boxShadow: "0 0 20px 5px rgba(59, 130, 246, 0.6)", 
+               }}
+             >
+               <Image
+                 src="/images/signup.png"
+                 alt="Signup Image"
+                 width={700}
+                 height={1000}
+                 className="w-full h-full object-cover rounded-2xl"
+               />
+             </div>
       </div>
     </>
   );
