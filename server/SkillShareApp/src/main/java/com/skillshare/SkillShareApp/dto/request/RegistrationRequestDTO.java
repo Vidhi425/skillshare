@@ -22,6 +22,7 @@ public class RegistrationRequestDTO {
     private String bio;
     private Role role;
     private List<String> proficiencies;
+    private String certificateBase64;
 
     // Helper method to convert Base64 image to Hexadecimal string
     public byte[] convertBase64ToHex() {
