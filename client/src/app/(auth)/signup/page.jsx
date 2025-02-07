@@ -7,6 +7,8 @@ import axios from "axios";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import Image from "next/image";
 import Proficiencies from "@/components/Proficiencies/proficiencies";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 // Define Zod schema for the normal signup form
 const signupSchema = z.object({
@@ -16,14 +18,17 @@ const signupSchema = z.object({
   email: z.string().email("Invalid email address."),
   password: z
     .string()
-    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,20}$/, "Invalid password.")
+    .regex(
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/,
+      "Invalid password."
+    )
     .min(6, "Password must be at least 6 characters.")
     .max(20, "Password cannot exceed 20 characters."),
   role: z.enum(["USER", "MENTOR"], "Please select a role."),
 });
 
 const mentorProfileSchema = z.object({
-  about: z
+  bio: z
     .string()
     .min(10, "Tell us more about yourself (at least 10 characters).")
     .max(500, "Too long! Keep it under 500 characters."),
@@ -35,10 +40,9 @@ const mentorProfileSchema = z.object({
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
-  const [profilePictureName, setProfilePictureName] = useState("");
-  const [certificateName, setCertificateName] = useState("");
   const [isMentor, setIsMentor] = useState(false); // State to toggle mentor fields
   const [selectedProficiencies, setSelectedProficiencies] = useState([]);
+  const router = useRouter();
 
   const toggleVisibility = () => {
     setShowPassword(!showPassword);
@@ -49,9 +53,13 @@ export default function Signup() {
     handleSubmit,
     formState: { errors },
     setValue,
+    watch,
+    getValues,
   } = useForm({
     resolver: zodResolver(signupSchema),
   });
+
+  const profilePicture = watch("profilePicture");
 
   const mentorForm = useForm({
     resolver: zodResolver(mentorProfileSchema),
@@ -59,9 +67,60 @@ export default function Signup() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("/api/signup", data);
+      const registerObj = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        userName: data.username,
+        email: data.email,
+        password: data.password,
+        role: data.role,
+        proficiencies: selectedProficiencies.map(
+          (proficiency) => proficiency.value
+        ),
+        bio: mentorForm.getValues("bio"),
+      };
+
+      const processFileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result.split(",")[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      };
+
+      try {
+        if (getValues("profilePicture")[0]) {
+          registerObj.profileImageBase64 = await processFileToBase64(
+            getValues("profilePicture")[0]
+          );
+        }
+
+        if (getValues("role") === "MENTOR") {
+          if (mentorForm.getValues("certificate")[0]) {
+            registerObj.certificateBase64 = await processFileToBase64(
+              mentorForm.getValues("certificate")[0]
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Error processing profile picture:", error);
+        return;
+      }
+
+      console.log("Register object:", registerObj);
+
+      const response = await axios.post(
+        "http://localhost:8080/auth/register",
+        registerObj
+      );
       console.log("Server response:", response.data);
-      alert("Signup successful!");
+      if (response.data.success) {
+        toast.success("Account created successfully!");
+        router.push("/login");
+      } else {
+        toast.error(response.data.message);
+      }
     } catch (error) {
       console.error("Error signing up:", error);
       alert("Something went wrong. Please try again.");
@@ -194,6 +253,24 @@ export default function Signup() {
                 Mentor
               </label>
             </div>
+
+            <div>
+              <label className="block text-gray-700 font-medium mb-2">
+                Upload Profile Picture
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                {...register("profilePicture")}
+                className="text-black w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.profilePicture && (
+                <p className="text-red-500 text-sm">
+                  {errors.profilePicture.message}
+                </p>
+              )}
+            </div>
+
             {errors.role && (
               <p className="text-red-500 text-sm">{errors.role.message}</p>
             )}
@@ -207,29 +284,13 @@ export default function Signup() {
                   </label>
                   <textarea
                     rows={5}
-                    {...mentorForm.register("about")}
+                    {...mentorForm.register("bio")}
                     placeholder="Tell us about yourself..."
                     className="w-full border border-gray-300 rounded-xl p-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></textarea>
-                  {mentorForm.formState.errors.about && (
+                  {mentorForm.formState.errors.bio && (
                     <p className="text-red-500 text-sm">
-                      {mentorForm.formState.errors.about.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-gray-700 font-medium mb-2">
-                    Upload Profile Picture
-                  </label>
-                  <input
-                    type="file"
-                    {...mentorForm.register("profilePicture")}
-                    className="text-black w-full p-3 border rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  {mentorForm.formState.errors.profilePicture && (
-                    <p className="text-red-500 text-sm">
-                      {mentorForm.formState.errors.profilePicture.message}
+                      {mentorForm.formState.errors.bio.message}
                     </p>
                   )}
                 </div>
@@ -249,18 +310,18 @@ export default function Signup() {
                     </p>
                   )}
                 </div>
-              </>
-            )}
 
-            {/* Proficiencies Multi-Select */}
-            <Proficiencies
-              onChange={handleProficiencyChange}
-              selectedProficiencies={selectedProficiencies}
-            />
-            {errors.proficiencies && (
-              <p className="text-red-500 text-sm">
-                {errors.proficiencies.message}
-              </p>
+                {/* Proficiencies Multi-Select */}
+                <Proficiencies
+                  onChange={handleProficiencyChange}
+                  selectedProficiencies={selectedProficiencies}
+                />
+                {errors.proficiencies && (
+                  <p className="text-red-500 text-sm">
+                    {errors.proficiencies.message}
+                  </p>
+                )}
+              </>
             )}
 
             {/* Submit Button */}
