@@ -39,7 +39,7 @@ const mentorprofile = ({ username, userImage }) => {
           <img
             src={userImage}
             alt="vidhi"
-            className="h-[150px] w-[250px] rounded-3xl object-cover"
+            className="h-[150px] w-[150px] rounded-full object-cover"
           />
         </div>
       </div>

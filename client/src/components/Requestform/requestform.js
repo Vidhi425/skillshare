@@ -56,17 +56,7 @@ const RequestForm = ({ onClose, onSubmit }) => {
               required
             />
           </div>
-          <div>
-            <label className="block mb-1 font-medium">Meet Link</label>
-            <input
-              type="url"
-              name="meetLink"
-              value={formData.meetLink}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
+          
           <div className="flex justify-between">
             <button
               type="button"

@@ -15,7 +15,7 @@ const leftnav = () => {
   ];
   return (
     <>
-      <nav className="text-black  h-screen flex-col gap-10">
+      <nav className="text-black  h-screen flex-col gap-10 px-6">
         <div className="flex justify-center items-center mt-8">
           <ProfileNav />
         </div>
