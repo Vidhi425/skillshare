@@ -38,6 +38,7 @@ const MentorSearch = () => {
           {users.map((user) => (
             <div key={user.username}>
               <MentorProfile
+                userId = {user.id}
                 username={user.username}
                 userImage={user.userImage}
                 onClick={() => handleShowProfile(user)}
