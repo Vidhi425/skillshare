@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const RequestForm = ({ onClose, onSubmit, mentorId }) => {
+const RequestForm = ({ onClose, onSubmit, userId }) => {
   const [formData, setFormData] = useState({
     topic: "",
     title: "",
@@ -23,15 +23,15 @@ const RequestForm = ({ onClose, onSubmit, mentorId }) => {
     try {
       const data = {
         ...formData,
-        mentorId,
+        userId,
       };
-      const response=await axios.post("apiurl", data);
+      const response = await axios.post("apiurl", data);
       console.log("Fake API Response:", response.data);
       alert("Request Sent Successfully!");
     } catch (error) {
       console.error("Error submitting request:", error);
       alert("Failed to send request.");
-    }finally{
+    } finally {
       setloading(false);
       onClose();
     }
@@ -90,7 +90,7 @@ const RequestForm = ({ onClose, onSubmit, mentorId }) => {
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
               disabled={loading}
             >
-               {loading ? "Submitting..." : "Submit"}
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>

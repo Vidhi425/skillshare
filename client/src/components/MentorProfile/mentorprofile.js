@@ -43,7 +43,7 @@ const mentorprofile = ({ username, userImage, userId }) => {
 
       {isPopupOpen && (
         <RequestForm
-          mentorId={mentorId}
+          userId={userId}
           onClose={handleClosePopup}
           onSubmit={handleFormSubmit}
         />
