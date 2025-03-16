@@ -4,7 +4,7 @@ import Ratings from "../Ratings/ratings";
 import MentorMeta from "../MentorMeta/mentormeta";
 import RequestForm from "../Requestform/requestform";
 
-const mentorprofile = ({ username, userImage }) => {
+const mentorprofile = ({ username, userImage, userId }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleSendRequest = () => {
@@ -20,10 +20,7 @@ const mentorprofile = ({ username, userImage }) => {
   };
   return (
     <>
-      <div
-        className="text-black  rounded-3xl  overflow-hidden flex justify-between items-center px-10 mx-1  shadow-md"
-       
-      >
+      <div className="text-black  rounded-3xl  overflow-hidden flex justify-between items-center px-10 mx-1  shadow-md">
         <div className="flex flex-col space-y-2">
           <MentorMeta username={username} />
           <Ratings />
@@ -39,13 +36,17 @@ const mentorprofile = ({ username, userImage }) => {
           <img
             src={userImage}
             alt="vidhi"
-            className="h-[150px] w-[250px] rounded-3xl object-cover"
+            className="h-[150px] w-[150px] rounded-full object-cover"
           />
         </div>
       </div>
 
       {isPopupOpen && (
-        <RequestForm onClose={handleClosePopup} onSubmit={handleFormSubmit} />
+        <RequestForm
+          userId={userId}
+          onClose={handleClosePopup}
+          onSubmit={handleFormSubmit}
+        />
       )}
     </>
   );

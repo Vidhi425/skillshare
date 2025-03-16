@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Leftnav from "../../components/Leftnav/leftnav";
 import MentorProfile from "../../components/MentorProfile/mentorprofile";
 import MentorDetails from "../../components/MentorDetails/mentordetails";
-import users from "../../data/mentor";
+import users from "../../../public/data/mentor";
 
 const MentorSearch = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -20,14 +20,9 @@ const MentorSearch = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden ml-8">
-      {/* Left Navigation */}
-      <div className="hidden md:block md:w-1/5 h-screen">
-        <Leftnav />
-      </div>
-
+    <div className="flex h-screen overflow-hidden ">
       {/* Main Content */}
-      <div className="flex flex-col w-full md:w-4/5 px-16 ">
+      <div className="flex flex-col w-full  px-16 ">
         <div className="flex-col mt-6">
           <div className="text-black font-semibold text-3xl">Find a Mentor</div>
           <div className="text-gray-400 font-thin text-md my-2">
@@ -43,6 +38,7 @@ const MentorSearch = () => {
           {users.map((user) => (
             <div key={user.username}>
               <MentorProfile
+                userId = {user.id}
                 username={user.username}
                 userImage={user.userImage}
                 onClick={() => handleShowProfile(user)}

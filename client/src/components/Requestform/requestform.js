@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-const RequestForm = ({ onClose, onSubmit }) => {
+const RequestForm = ({ onClose, onSubmit, userId }) => {
   const [formData, setFormData] = useState({
     topic: "",
     title: "",
@@ -8,15 +9,34 @@ const RequestForm = ({ onClose, onSubmit }) => {
     meetLink: "",
   });
 
+  const [loading, setloading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
-    onClose(); 
+    setloading(true);
+
+    try {
+      const data = {
+        ...formData,
+        userId,
+      };
+      const response = await axios.post("apiurl", data);
+      console.log("Fake API Response:", response.data);
+      alert("Request Sent Successfully!");
+    } catch (error) {
+      console.error("Error submitting request:", error);
+      alert("Failed to send request.");
+    } finally {
+      setloading(false);
+      onClose();
+    }
+
+    // onClose();
   };
 
   return (
@@ -56,17 +76,7 @@ const RequestForm = ({ onClose, onSubmit }) => {
               required
             />
           </div>
-          <div>
-            <label className="block mb-1 font-medium">Meet Link</label>
-            <input
-              type="url"
-              name="meetLink"
-              value={formData.meetLink}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
+
           <div className="flex justify-between">
             <button
               type="button"
@@ -78,8 +88,9 @@ const RequestForm = ({ onClose, onSubmit }) => {
             <button
               type="submit"
               className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
