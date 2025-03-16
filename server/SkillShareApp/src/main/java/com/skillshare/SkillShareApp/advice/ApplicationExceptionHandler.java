@@ -11,6 +11,9 @@ public class ApplicationExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ResponseDTO> handleRuntimeException(RuntimeException e) {
-        return ResponseEntity.badRequest().body(ResponseDTO.builder().message(e.getMessage()).success(false).build());
+        ResponseDTO responseDTO = new ResponseDTO();
+        responseDTO.setMessage(e.getMessage());
+        responseDTO.setSuccess(false);
+        return ResponseEntity.badRequest().body(responseDTO);
     }
 }
