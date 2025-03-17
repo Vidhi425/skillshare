@@ -1,6 +1,7 @@
 package com.skillshare.SkillShareApp.service.Appointment;
 
 import com.skillshare.SkillShareApp.dto.request.AppointmentRequestDTO;
+import com.skillshare.SkillShareApp.dto.response.AppointmentListResponseDTO;
 import com.skillshare.SkillShareApp.dto.response.MentorSearchResponseDTO;
 import com.skillshare.SkillShareApp.dto.response.ResponseDTO;
 import com.skillshare.SkillShareApp.enums.AppointmentStatus;
@@ -82,4 +83,13 @@ public class AppointmentService {
         return ResponseEntity.ok(new ResponseDTO("Appointment created successfully", true));
     }
 
+    public ResponseEntity<AppointmentListResponseDTO> getPendingAppointments(Long mentorId) {
+        if (mentorId == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(AppointmentListResponseDTO.builder().success(true).message("Pending appoints found").appointments(appointmentRepository.findByMentorId(mentorId).stream().filter(appointment -> appointment.getAppointmentStatus().equals(AppointmentStatus.PENDING)).toList()).build());
+    }
+
+    public ResponseEntity<AppointmentListResponseDTO> getAllAppointments(Long userId) {
+        if (userId == null) return null;
+        return ResponseEntity.ok(AppointmentListResponseDTO.builder().success(true).message("All appoints found").appointments(appointmentRepository.findByUserId(userId)).build());
+    }
 }

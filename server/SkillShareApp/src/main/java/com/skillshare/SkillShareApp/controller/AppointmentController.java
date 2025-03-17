@@ -1,6 +1,7 @@
 package com.skillshare.SkillShareApp.controller;
 
 import com.skillshare.SkillShareApp.dto.request.AppointmentRequestDTO;
+import com.skillshare.SkillShareApp.dto.response.AppointmentListResponseDTO;
 import com.skillshare.SkillShareApp.dto.response.MentorSearchResponseDTO;
 import com.skillshare.SkillShareApp.dto.response.ResponseDTO;
 import com.skillshare.SkillShareApp.service.Appointment.AppointmentService;
@@ -25,5 +26,15 @@ public class AppointmentController {
     @PostMapping("/create-appointment")
     public ResponseEntity<ResponseDTO> createAppointment(@RequestBody AppointmentRequestDTO request) {
         return appointmentService.createAppointment(request);
+    }
+
+    @GetMapping("/pending-appointment/{mentorId}")
+    public ResponseEntity<AppointmentListResponseDTO> getAppointments(@PathVariable Long mentorId) {
+        return appointmentService.getPendingAppointments(mentorId);
+    }
+
+    @GetMapping("/all-appointments/{userId}")
+    public ResponseEntity<AppointmentListResponseDTO> getAllAppointments(@PathVariable Long userId) {
+        return appointmentService.getAllAppointments(userId);
     }
 }
