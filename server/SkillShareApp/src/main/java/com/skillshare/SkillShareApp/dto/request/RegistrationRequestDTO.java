@@ -29,7 +29,6 @@ public class RegistrationRequestDTO {
         if (profileImageBase64 == null || profileImageBase64.isEmpty()) {
             return null;
         }
-        byte[] imageBytes = java.util.Base64.getDecoder().decode(profileImageBase64);
-        return imageBytes;
+        return java.util.Base64.getDecoder().decode(profileImageBase64);
     }
 }
