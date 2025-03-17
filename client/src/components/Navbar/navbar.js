@@ -1,57 +1,65 @@
 "use client";
 import React, { useState } from "react";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-transparent w-full overflow-hidden">
-      <div className="w-full px-4 py-2 flex items-center justify-between">
+    <nav
+      className={`bg-[#a4abb4] w-full overflow-hidden text-black ${montserrat.className}`}
+    >
+      <div className="w-full px-12 py-10 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-4xl font-bold text-blue-700">SkillShare</div>
+        <div className="text-4xl font-semibold">SkillShare</div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-10 text-blue-700 font-medium">
+        <ul className="hidden md:flex space-x-10 font-medium">
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Home
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               About
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Services
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Resources
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Contact
             </a>
           </li>
         </ul>
 
         {/* Buttons */}
-        <div className="hidden md:flex space-x-4">
-          <button className="px-4 py-2 border text-blue-700 rounded-3xl hover:bg-blue-500 hover:text-white">
+        <div className="hidden md:flex space-x-4 text-black">
+          <button className="px-4 py-2 border border-black text-black rounded-3xl ">
             <a href="/login">Login</a>
           </button>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-3xl hover:bg-white hover:text-blue-700 hover:border">
+          <button className="px-4 py-2 border border-black text-black rounded-3xl ">
             <a href="/signup">Signup</a>
           </button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-blue-700 focus:outline-none"
+          className="md:hidden text-gray-300 focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
@@ -64,41 +72,41 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed top-0 left-0 w-full h-full bg-blue-100 z-50 transform ${
+        className={`md:hidden fixed top-0 left-0 w-full h-full bg-[#1f1f1f] z-50 transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
-        <ul className="flex flex-col items-center space-y-4 py-4 text-blue-700 font-medium">
+        <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300 font-medium">
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Home
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               About
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Services
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Resources
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-500">
+            <a href="#" className="hover:text-gray-400">
               Contact
             </a>
           </li>
-          <div className="space-y-2 w-3/4">
-            <button className="w-full px-4 py-2 border border-blue-700 text-blue-700 rounded-lg hover:bg-blue-700 hover:text-white">
-              Login
+          <div className="space-y-2 w-3/4 text-black">
+            <button className="w-full px-4 py-2 border border-black text-black rounded-lg hover:bg-gray-500 hover:text-white">
+              login
             </button>
-            <button className="w-full px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800">
+            <button className="w-full px-4 py-2 bg-black text-black rounded-lg hover:bg-gray-600">
               Signup
             </button>
           </div>
