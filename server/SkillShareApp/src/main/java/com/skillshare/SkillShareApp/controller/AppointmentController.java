@@ -28,11 +28,6 @@ public class AppointmentController {
         return appointmentService.createAppointment(request);
     }
 
-    @GetMapping("/pending-appointment/{mentorId}")
-    public ResponseEntity<AppointmentListResponseDTO> getAppointments(@PathVariable Long mentorId) {
-        return appointmentService.getPendingAppointments(mentorId);
-    }
-
     @GetMapping("/all-appointments/{userId}")
     public ResponseEntity<AppointmentListResponseDTO> getAllAppointments(@PathVariable Long userId) {
         return appointmentService.getAllAppointments(userId);

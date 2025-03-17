@@ -38,6 +38,7 @@ public class SecurityConfig {
 //                        .requestMatchers("/mentor/**").hasAuthority("MENTOR")
                         .requestMatchers("/mentor/**").permitAll()
 //                        .requestMatchers("/user/**").hasAuthority("USER")
+                      .requestMatchers("/user/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
