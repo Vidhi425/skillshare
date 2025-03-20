@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+// import userApi from "../../services/menteeservices/instance"
 
 const RequestForm = ({ onClose, onSubmit, userId }) => {
   const [formData, setFormData] = useState({
     topic: "",
     title: "",
     description: "",
-    meetLink: "",
+    mode: "ONLINE",
+    
   });
+   const menteeId = useSelector((state)=>state.auth.user.userId)
+  //  console.log(menteeId)
 
+//    const reduxState = useSelector((state) => state);
+// console.log("Redux State:", reduxState);
   const [loading, setloading] = useState(false);
 
   const handleChange = (e) => {
@@ -19,14 +26,17 @@ const RequestForm = ({ onClose, onSubmit, userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
+    console.log(menteeId)
 
     try {
       const data = {
         ...formData,
-        userId,
+        mentorId:userId,
+        userId:menteeId
       };
-      const response = await axios.post("apiurl", data);
-      console.log("Fake API Response:", response.data);
+      console.log(data);
+      const response = await axios.post("http://localhost:8080/user/create-appointment", data);
+      console.log("Appointment Created", response.data);
       alert("Request Sent Successfully!");
     } catch (error) {
       console.error("Error submitting request:", error);

@@ -1,14 +1,14 @@
-'use client'
-import { useRef } from 'react'
-import { Provider } from 'react-redux'
-import { makeStore } from '../redux/store'
+"use client"; // ✅ Ensure this file runs only on the client side
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "../redux/store"; // ✅ Correct import
 
 export default function StoreProvider({ children }) {
-  const storeRef = useRef(undefined)
-  if (!storeRef.current) {
-    // Create the store instance the first time this renders
-    storeRef.current = makeStore()
-  }
-
-  return <Provider store={storeRef.current}>{children}</Provider>
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
 }

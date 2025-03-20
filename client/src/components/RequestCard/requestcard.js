@@ -19,13 +19,13 @@ const RequestCard = ({request}) => {
 
         {/* Pending Status */}
         <div className={`rounded-full px-3 py-1 text-xs sm:text-sm text-center ${
-          request.status==="Pending"
+          request.appointmentStatus==="Pending"
           ? "bg-gray-200 text-black"
-          : request.status === "Accepted"
+          : request.appointmentStatus === "Accepted"
           ? "bg-green-200 text-green-800"
           : "bg-red-200 text-red-800"
           }`}>
-          {request.status}
+          {request.appointmentStatus}
         </div>
       </div>
 
