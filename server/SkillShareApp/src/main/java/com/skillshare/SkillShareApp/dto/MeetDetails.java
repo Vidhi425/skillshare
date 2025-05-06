@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
+
 import org.springframework.data.util.Pair;
 
 @Data
@@ -18,4 +21,5 @@ public class MeetDetails {
     private String offlineMeetLocation;
     private String offlineMeetKey;
     private Pair<Float, Float> offlineMeetCoords;
+    private Date meetDate;
 }

@@ -39,6 +39,7 @@ export default function RootLayout({ children }) {
               {/* Main Content */}
               <main className={`flex-1 ${pathname !== "/"}`}>{children}</main>
             </div>
+            
           </PersistGate>
         </StoreProvider>
       </body>

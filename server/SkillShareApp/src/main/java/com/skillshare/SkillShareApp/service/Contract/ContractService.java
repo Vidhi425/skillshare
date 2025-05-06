@@ -84,6 +84,7 @@ public class ContractService {
                     .mode(Mode.ONLINE)
                     .onlineMeetUrl(mentorDetails.getOnlineMeetUrl()) // Mentor provides
                     .onlineMeetPassword(encryptedPassword)
+                    .meetDate(mentorDetails.getMeetDate())
                     .build();
         } else {
             // Generate offline access key
@@ -94,6 +95,7 @@ public class ContractService {
                     .offlineMeetLocation(mentorDetails.getOfflineMeetLocation()) // Mentor provides
                     .offlineMeetCoords(mentorDetails.getOfflineMeetCoords()) // Mentor provides
                     .offlineMeetKey(accessKey)
+                    .meetDate(mentorDetails.getMeetDate())
                     .build();
         }
 
