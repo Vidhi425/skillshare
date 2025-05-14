@@ -3,7 +3,8 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 import authReducer from "./authSlice";
-import locationReducer from "./authSlice"
+import locationReducer from "./authSlice";
+import meetingTimersReducer from "./timerSlice";
 
 // Persist config
 const persistConfig = {
@@ -14,7 +15,8 @@ const persistConfig = {
 // Combine reducers (in case you add more later)
 const rootReducer = combineReducers({
   auth: authReducer,
-  location : locationReducer
+  location : locationReducer,
+  meetingTimers: meetingTimersReducer,
 });
 
 // Persisted reducer

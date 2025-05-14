@@ -7,6 +7,7 @@ import { persistor } from "../redux/store";
 import { Toaster } from "react-hot-toast";
 import Leftnav from "@/components/Leftnav/leftnav";
 import { usePathname } from "next/navigation";
+import MeetingTimer from "../components/MeetingTimer/meetingtimer"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <StoreProvider>
+          <MeetingTimer/>
           <PersistGate loading={null} persistor={persistor}>
             <Toaster position="bottom-left" reverseOrder={false} />
 
